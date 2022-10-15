@@ -69,23 +69,66 @@ Field* Board::getField(int x, int y)
 
 void Board::drawBoard()
 {
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            switch (this->board[i][j].fieldState)
-            {
-            case FieldState::field_empty:
-                cout << "O ";
-                break;
-            case FieldState::field_black:
-                cout << "# ";
-                break;
-            case FieldState::field_white:
-                cout << "& ";
-                break;
-            default:
-                break;
-            }
+    cout << " " << (char)218 << (char)196 << (char)194 << (char)196 << (char)194 << (char)196 << (char)194 << (char)196 << (char)194 << (char)196 << (char)194 << (char)196 << (char)194 << (char)196 << (char)194 << (char)196 << (char)191 << endl;
+
+    for (int i = 0; i < 8; i++)
+    {
+
+        if (i == 0) {
+            cout << "A";
         }
-        cout << "\n";
+
+        if (i == 1) {
+            cout << "B";
+        }
+
+        if (i == 2) {
+            cout << "C";
+        }
+
+        if (i == 3) {
+            cout << "D";
+        }
+
+        if (i == 4) {
+            cout << "E";
+        }
+
+        if (i == 5) {
+            cout << "F";
+        }
+
+        if (i == 6) {
+            cout << "G";
+        }
+
+        if (i == 7) {
+            cout << "H";
+        }
+
+        for (int j = 0; j < 8; j++)
+        {
+            if (this->board[i][j].fieldState == FieldState::field_empty) {
+                cout << (char)179 << " ";
+            }
+            else if (this->board[i][j].fieldState == FieldState::field_black) {
+                cout << (char)179 << "x";
+            }
+            else{
+                cout << (char)179 << "o";
+            }
+
+        }
+        cout << (char)179 << endl;
+
+
+    };
+    cout << " ";
+    cout << (char)192 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)217 << endl;
+    cout << " ";
+    for (int k = 1;k < 9;k++) {
+
+        cout << " " << k;
     }
+
 }

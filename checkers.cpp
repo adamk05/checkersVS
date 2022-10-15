@@ -7,6 +7,6 @@ int main()
 {
     Board board;
     board.drawBoard();
-    cout << "chuj";
+    
 }
 
