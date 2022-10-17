@@ -9,6 +9,8 @@ int main()
     Board board;
     board.drawBoard();
     Game game;
+    game.move();
+    game.move();
    
 }
 

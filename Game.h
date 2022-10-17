@@ -6,7 +6,7 @@ class Game {
 public:
     Player player1;
     Player player2;
-    Player* actualPlayer;
+    Player actualPlayer;
     Board board;
 
     Game();

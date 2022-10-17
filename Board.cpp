@@ -75,35 +75,35 @@ void Board::drawBoard()
     {
 
         if (i == 0) {
-            cout << "A";
+            cout << "1";
         }
 
         if (i == 1) {
-            cout << "B";
+            cout << "2";
         }
 
         if (i == 2) {
-            cout << "C";
+            cout << "3";
         }
 
         if (i == 3) {
-            cout << "D";
+            cout << "4";
         }
 
         if (i == 4) {
-            cout << "E";
+            cout << "5";
         }
 
         if (i == 5) {
-            cout << "F";
+            cout << "6";
         }
 
         if (i == 6) {
-            cout << "G";
+            cout << "7";
         }
 
         if (i == 7) {
-            cout << "H";
+            cout << "8";
         }
 
         for (int j = 0; j < 8; j++)
@@ -112,10 +112,10 @@ void Board::drawBoard()
                 cout << (char)179 << " ";
             }
             else if (this->board[i][j].fieldState == FieldState::field_black) {
-                cout << (char)179 << "x";
+                cout << (char)179 << "b";
             }
             else{
-                cout << (char)179 << "o";
+                cout << (char)179 << "w";
             }
 
         }
@@ -126,9 +126,39 @@ void Board::drawBoard()
     cout << " ";
     cout << (char)192 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)193 << (char)196 << (char)217 << endl;
     cout << " ";
-    for (int k = 1;k < 9;k++) {
+    for (int k = 0;k < 8;k++) {
 
-        cout << " " << k;
+        if (k == 0) {
+            cout << " A ";
+        }
+
+        if (k == 1) {
+            cout << "B ";
+        }
+
+        if (k == 2) {
+            cout << "C ";
+        }
+
+        if (k == 3) {
+            cout << "D ";
+        }
+
+        if (k == 4) {
+            cout << "E ";
+        }
+
+        if (k == 5) {
+            cout << "F ";
+        }
+
+        if (k == 6) {
+            cout << "G ";
+        }
+
+        if (k == 7) {
+            cout << "H";
+        }
     }
 
 }
