@@ -9,7 +9,7 @@ public:
     Player* actualPlayer;
     Board board;
 
-    void gameStart();
+    Game();
     void move();
     bool gameEnd();
 };

@@ -2,6 +2,8 @@
 #include "Player.h"
 #include <iostream>
 
+Player::Player(){}
+
 Player::Player(std::string name, Color color) {
     this->name = name;
     this->color = color;
