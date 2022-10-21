@@ -161,4 +161,6 @@ void Board::drawBoard()
         }
     }
 
+    cout << endl;
+
 }
