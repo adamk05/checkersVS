@@ -14,10 +14,10 @@ Game::Game() {
     string name2;
     
     cout<<endl;
-    cout << "wybierz swoj nick graczu 1!" << endl;
+    cout << "Wybierz swoj nick graczu 1!" << endl;
     cin >> name1;
 
-    cout << "wybierz swoj nick graczu 2!" << endl;
+    cout << "Wybierz swoj nick graczu 2!" << endl;
     cin >> name2;
 
     srand(time(0));
@@ -33,7 +33,7 @@ Game::Game() {
 
         this->actualPlayer = p1;
 
-        cout << "gracz " << name1 << " zaczyna";
+        cout << "Gracz " << name1 << " zaczyna";
     }
     else {
         Player p1(name1, black);
@@ -65,7 +65,7 @@ void Game::move() {
     
     
     while (right_field == false) {
-        cout << "Wybierz pole aby ruszyc pionkiem " << this->actualPlayer.getName() << endl;
+        cout << "Wybierz pole z pionkiem, którym chcesz ruszyc " << this->actualPlayer.getName() << endl;
         cout << "Kolumna: ";
         cin >> actual_position_column_char;
         cout << "" << endl;
@@ -76,42 +76,42 @@ void Game::move() {
         actual_position_column = toupper(actual_position_column_char);
 
 
-        if (actual_position_column == "A") {        //A
+        if (actual_position_column == "A") {        
 
             position_column_check = 0;
             right_field = true;
         }
-        else if (actual_position_column == "B") {   //B
+        else if (actual_position_column == "B") {   
 
             position_column_check = 1;
             right_field = true;
         }
-        else if (actual_position_column == "C") {   //C
+        else if (actual_position_column == "C") {   
 
             position_column_check = 2;
             right_field = true;
         }
-        else if (actual_position_column == "D") {   //D
+        else if (actual_position_column == "D") {   
 
             position_column_check = 3;
             right_field = true;
         }
-        else if (actual_position_column == "E") {   //E
+        else if (actual_position_column == "E") {   
 
             position_column_check = 4;
             right_field = true;
-        }
-        else if (actual_position_column == "F") {   //F
+	}
+        else if (actual_position_column == "F") {   
 
             position_column_check = 5;
             right_field = true;
         }
-        else if (actual_position_column == "G") {   //G
+        else if (actual_position_column == "G") {   
 
             position_column_check = 6;
             right_field = true;
         }
-        else if (actual_position_column == "H") {   //H
+        else if (actual_position_column == "H") {   
 
             position_column_check = 7;
             right_field = true;
@@ -123,42 +123,42 @@ void Game::move() {
         }
         
 
-        if (actual_position_row == "1") {        //1
+        if (actual_position_row == "1") {        
 
             position_row_check = 0;
             right_field = true;
         }
-        else if (actual_position_row == "2") {   //2
+        else if (actual_position_row == "2") {   
 
             position_row_check = 1;
             right_field = true;
         }
-        else if (actual_position_row == "3") {   //3
+        else if (actual_position_row == "3") {   
 
             position_row_check = 2;
             right_field = true;
         }
-        else if (actual_position_row == "4") {   //4
+        else if (actual_position_row == "4") {   
 
             position_row_check = 3;
             right_field = true;
         }
-        else if (actual_position_row == "5") {   //5
+        else if (actual_position_row == "5") {   
 
             position_row_check = 4;
             right_field = true;
         }
-        else if (actual_position_row == "6") {   //6
+        else if (actual_position_row == "6") {   
 
             position_row_check = 5;
             right_field = true;
         }
-        else if (actual_position_row == "7") {   //7
+        else if (actual_position_row == "7") {   
 
             position_row_check = 6;
             right_field = true;
         }
-        else if (actual_position_row == "8") {   //8
+        else if (actual_position_row == "8") {   
 
             position_row_check = 7;
             right_field = true;
@@ -174,11 +174,11 @@ void Game::move() {
 
            if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white) {
 
-               cout << "rusz siê bialym pionkiem";
+               cout << "Rusz sie bialym pionkiem";
            }
            else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white_king) {
 
-               cout << "rusz siê bialym hetmanem";
+               cout << "Rusz sie bialym hetmanem";
 
            }
            else {
@@ -191,11 +191,11 @@ void Game::move() {
 
             if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black) {
 
-                cout << "rusz sie czarnym pionkiem";
+                cout << "Rusz sie czarnym pionkiem";
             }
             else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black_king) {
 
-                cout << "rusz sie czarnym hetmanem";
+                cout << "Rusz sie czarnym hetmanem";
             }
             else {
             	cout << "Wpisz poprawne pole" << endl;
