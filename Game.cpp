@@ -12,8 +12,10 @@ using namespace std;
 Game::Game() {
     string name1;
     string name2;
+
+    Board board;
+    this->board = board;
     
-    cout<<endl;
     cout << "Wybierz swoj nick graczu 1!" << endl;
     cin >> name1;
 
@@ -33,7 +35,7 @@ Game::Game() {
 
         this->actualPlayer = p1;
 
-        cout << "Gracz " << name1 << " zaczyna";
+        cout << "Gracz " << name1 << " zaczyna"<<endl;
     }
     else {
         Player p1(name1, black);
@@ -44,7 +46,7 @@ Game::Game() {
 
         this->actualPlayer = p2;
 
-        cout << "Gracz " << name2 << " zaczyna!";
+        cout << "Gracz " << name2 << " zaczyna!"<<endl;
     }
 
     
@@ -62,10 +64,10 @@ void Game::move() {
     string move_position;
     bool right_field = false;
 
-    
+    this->board.drawBoard();
     
     while (right_field == false) {
-        cout << "Wybierz pole z pionkiem, którym chcesz ruszyc " << this->actualPlayer.getName() << endl;
+        cout << "Wybierz pole z pionkiem, ktorym chcesz ruszyc " << this->actualPlayer.getName() << endl;
         cout << "Kolumna: ";
         cin >> actual_position_column_char;
         cout << "" << endl;
