@@ -64,13 +64,12 @@ void Game::move() {
 
     
     
-    cout << "JD" << endl;
     while (right_field == false) {
-        cout << "Wybierz pole aby ruszyæ pionkiem " << this->actualPlayer.getName() << endl;
+        cout << "Wybierz pole aby ruszyc pionkiem " << this->actualPlayer.getName() << endl;
         cout << "Kolumna: ";
         cin >> actual_position_column_char;
         cout << "" << endl;
-        cout << "Rz¹d: ";
+        cout << "Rzad: ";
         cin >> actual_position_row;
         cout << "" << endl;
 
@@ -118,7 +117,7 @@ void Game::move() {
             right_field = true;
         }
         else {
-            cout << "G³upia kurwo, wpisz dobre pole, japierdole" << endl;
+            cout << "Wpisz poprawne pole" << endl;
             right_field = false;
             continue;
         }
@@ -165,7 +164,7 @@ void Game::move() {
             right_field = true;
         }
         else {
-            cout << "G³upia kurwo, wpisz dobre pole, japierdole" << endl;
+            cout << "Wpisz poprawne pole" << endl;
             right_field = false;
             continue;
         }
@@ -175,15 +174,15 @@ void Game::move() {
 
            if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white) {
 
-               cout << "rusz siê bia³ym pionkiem";
+               cout << "rusz siÃª bialym pionkiem";
            }
            else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white_king) {
 
-               cout << "rusz siê bia³ym hetmanem";
+               cout << "rusz siÃª bialym hetmanem";
 
            }
            else {
-               cout << "G³upia kurwo, wpisz dobre pole, japierdole" << endl;
+            	cout << "Wpisz poprawne pole" << endl;
                right_field = false;
            }
 
@@ -192,14 +191,14 @@ void Game::move() {
 
             if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black) {
 
-                cout << "rusz siê czarnym pionkiem";
+                cout << "rusz sie czarnym pionkiem";
             }
             else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black_king) {
 
-                cout << "rusz siê czarnym hetmanem";
+                cout << "rusz sie czarnym hetmanem";
             }
             else {
-                cout << "G³upia kurwo, wpisz dobre pole, japierdole" << endl;
+            	cout << "Wpisz poprawne pole" << endl;
                 right_field = false;
             }
 
