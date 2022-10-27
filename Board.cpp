@@ -64,7 +64,10 @@ Board::Board()
 
 Field* Board::getField(int x, int y)
 {
-    return &this->board[x][y];
+    if (x <= 7 && y <= 7)
+        return &this->board[x][y];
+    else
+        return nullptr;
 }
 
 void Board::drawBoard()
