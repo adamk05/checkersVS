@@ -53,7 +53,6 @@ Game::Game() {
 }
 
 void Game::move() {
-
     char actual_position_column_char;
     string actual_position_column;
     string actual_position_row;
@@ -77,44 +76,35 @@ void Game::move() {
 
         actual_position_column = toupper(actual_position_column_char);
 
-
         if (actual_position_column == "A") {        
-
             position_column_check = 0;
             right_field = true;
         }
         else if (actual_position_column == "B") {   
-
             position_column_check = 1;
             right_field = true;
         }
         else if (actual_position_column == "C") {   
-
             position_column_check = 2;
             right_field = true;
         }
         else if (actual_position_column == "D") {   
-
             position_column_check = 3;
             right_field = true;
         }
         else if (actual_position_column == "E") {   
-
             position_column_check = 4;
             right_field = true;
-	}
+	    }
         else if (actual_position_column == "F") {   
-
             position_column_check = 5;
             right_field = true;
         }
         else if (actual_position_column == "G") {   
-
             position_column_check = 6;
             right_field = true;
         }
         else if (actual_position_column == "H") {   
-
             position_column_check = 7;
             right_field = true;
         }
@@ -122,46 +112,37 @@ void Game::move() {
             cout << "Wpisz poprawne pole" << endl;
             right_field = false;
             continue;
-        }
-        
+        }  
 
         if (actual_position_row == "1") {        
-
             position_row_check = 0;
             right_field = true;
         }
         else if (actual_position_row == "2") {   
-
             position_row_check = 1;
             right_field = true;
         }
         else if (actual_position_row == "3") {   
-
             position_row_check = 2;
             right_field = true;
         }
         else if (actual_position_row == "4") {   
-
             position_row_check = 3;
             right_field = true;
         }
         else if (actual_position_row == "5") {   
-
             position_row_check = 4;
             right_field = true;
         }
         else if (actual_position_row == "6") {   
-
             position_row_check = 5;
             right_field = true;
         }
         else if (actual_position_row == "7") {   
-
             position_row_check = 6;
             right_field = true;
         }
         else if (actual_position_row == "8") {   
-
             position_row_check = 7;
             right_field = true;
         }
@@ -175,42 +156,89 @@ void Game::move() {
         if (this->actualPlayer.getColor() == white) {
 
            if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white) {
-
-               cout << "Rusz sie bialym pionkiem";
+               //if (position_column_check == 0 && (board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_empty || (board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_black) && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty) {
+                   //wykonanie ruchu
+                   // cout<<"ruch bia³ym pionkiem"<<endl;
+               // }
+               if (
+                   (position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_empty)
+                   || (position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_empty)) 
+               {
+                   //wykonanie ruchu
+                   cout << "Ruch bia³ym pionkiem"<<endl;
+               }
+               else if (((position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_black)
+                   && (position_column_check < 6 && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty))
+                   || ((position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_black) 
+                   && (position_column_check > 1 && board.getField(position_row_check + 2, position_column_check - 2)->fieldState == FieldState::field_empty)))
+               {
+                   //wykonanie ruchu
+                   cout << "Ruch bia³ym pionkiem"<<endl;
+               }
+               else if (((position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_black_king)
+                   && (position_column_check < 6 && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty))
+                   || ((position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_black_king)
+                       && (position_column_check > 1 && board.getField(position_row_check + 2, position_column_check - 2)->fieldState == FieldState::field_empty)))
+               {
+                   //wykonanie ruchu
+                   cout << "Ruch bia³ym pionkiem" << endl;
+               }
+               else {
+                   cout << "Nie mo¿esz siê ruszyæ tym pionkiem, wybierz innego"<<endl;
+                   right_field = false;
+               }
            }
            else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white_king) {
-
-               cout << "Rusz sie bialym hetmanem";
-
+                cout << "Rusz sie bialym hetmanem";
            }
            else {
-            	cout << "Wpisz poprawne pole" << endl;
-               right_field = false;
+                cout << "Wpisz poprawne pole" << endl;
+                right_field = false;
            }
 
         }
         else {
-
             if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black) {
-
-                cout << "Rusz sie czarnym pionkiem";
+                if (
+                    (position_column_check < 7 && board.getField(position_row_check - 1, position_column_check + 1)->fieldState == FieldState::field_empty)
+                    || (position_column_check > 0 && board.getField(position_row_check - 1, position_column_check - 1)->fieldState == FieldState::field_empty))
+                {
+                    //wykonanie ruchu
+                    cout << "Ruch czarnym pionkiem" << endl;
+                }
+                else if (((position_column_check < 7 && board.getField(position_row_check - 1, position_column_check + 1)->fieldState == FieldState::field_white)
+                    && (position_column_check < 6 && board.getField(position_row_check - 2, position_column_check + 2)->fieldState == FieldState::field_empty))
+                    || ((position_column_check > 0 && board.getField(position_row_check - 1, position_column_check - 1)->fieldState == FieldState::field_white)
+                        && (position_column_check > 1 && board.getField(position_row_check - 2, position_column_check - 2)->fieldState == FieldState::field_empty)))
+                {
+                    //wykonanie ruchu
+                    cout << "Ruch czarnym pionkiem" << endl;
+                }
+                else if (((position_column_check < 7 && board.getField(position_row_check - 1, position_column_check + 1)->fieldState == FieldState::field_white_king)
+                    && (position_column_check < 6 && board.getField(position_row_check - 2, position_column_check + 2)->fieldState == FieldState::field_empty))
+                    || ((position_column_check > 0 && board.getField(position_row_check - 1, position_column_check - 1)->fieldState == FieldState::field_white_king)
+                        && (position_column_check > 1 && board.getField(position_row_check - 2, position_column_check - 2)->fieldState == FieldState::field_empty)))
+                {
+                    //wykonanie ruchu
+                    cout << "Ruch czarnym pionkiem" << endl;
+                }
+                else {
+                    cout << "Nie mo¿esz siê ruszyæ tym pionkiem, wybierz innego" << endl;
+                    right_field = false;
+                }
             }
             else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black_king) {
-
-                cout << "Rusz sie czarnym hetmanem";
+                cout << "Rusz sie czarnym hetmanem"<<endl;
             }
             else {
             	cout << "Wpisz poprawne pole" << endl;
                 right_field = false;
             }
-
         }
-
     }
 
     
     if (this->actualPlayer.getName() == this->player1.getName()) {
-
         this->actualPlayer = player2;
     }
     else
