@@ -47,9 +47,7 @@ Game::Game() {
         this->actualPlayer = p2;
 
         cout << "Gracz " << name2 << " zaczyna!"<<endl;
-    }
-
-    
+    }   
 }
 
 void Game::move() {
@@ -61,6 +59,7 @@ void Game::move() {
     int position_row_check;
 
     string move_position;
+    int options = 0;
     bool right_field = false;
 
     this->board.drawBoard();
@@ -150,22 +149,24 @@ void Game::move() {
             cout << "Wpisz poprawne pole" << endl;
             right_field = false;
             continue;
-        }
-        
+        }       
 
         if (this->actualPlayer.getColor() == white) {
 
            if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white) {
-               //if (position_column_check == 0 && (board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_empty || (board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_black) && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty) {
-                   //wykonanie ruchu
-                   // cout<<"ruch bia³ym pionkiem"<<endl;
-               // }
                if (
                    (position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_empty)
                    || (position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_empty)) 
                {
-                   //wykonanie ruchu
-                   cout << "Ruch bia³ym pionkiem"<<endl;
+                   cout << "Wybierz, który ruch chcesz wykonaæ"<<endl;
+                   if (position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_empty) {
+                       options++;
+                       cout << options << ". Prawy skos" << board.getFieldName(position_row_check + 1, position_column_check + 1) << endl;
+                   }
+
+                   if (position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_empty) {
+                       cout << options << ". Lewy skos" << board.getFieldName(position_row_check + 1, position_column_check - 1);
+                   }
                }
                else if (((position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_black)
                    && (position_column_check < 6 && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty))

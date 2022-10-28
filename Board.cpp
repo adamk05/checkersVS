@@ -1,12 +1,14 @@
 #include "Board.h"
 #include "Field.h"
 #include "FieldState.h"
-#include "iostream"
+#include <iostream>
 
 using namespace std;
 
 Board::Board()
 {
+    this->columns = { "A", "B", "C", "D", "E", "F", "G", "H" };
+    this->rows = { "1", "2", "3", "4", "5", "6", "7", "8"};
     for (int i = 0; i < 8; i++)
     {
         for (int j = 0; j < 8; j++)
@@ -68,6 +70,62 @@ Field* Board::getField(int x, int y)
         return &this->board[x][y];
     else
         return nullptr;
+}
+
+string Board::getFieldName(int x, int y)
+{
+    string result = "";
+    if (y == 0) {
+        result += "A";
+    }
+    else if (y == 1) {
+        result += "B";
+    }
+    else if (y == 2) {        
+        result += "C";
+    }
+    else if (y == 3) {       
+        result += "D";
+    }
+    else if (y == 4) {        
+        result += "E";
+    }
+    else if (y == 5) {       
+        result += "F";
+    }
+    else if (y == 6) {       
+        result += "G";
+    }
+    else if (y == 7) {      
+        result += "H";
+    }
+
+    if (x == 0) {
+        result += "1";
+    }
+    else if (x == 1) {
+        result += "2";
+    }
+    else if (x == 2) {
+        result += "3";
+    }
+    else if (x == 3) {
+        result += "4";
+    }
+    else if (x == 4) {
+        result += "5";
+    }
+    else if (x == 5) {
+        result += "6";
+    }
+    else if (x == 6) {
+        result += "7";
+    }
+    else if (x == 7) {
+        result += "8";
+    }
+
+    return result;
 }
 
 void Board::drawBoard()
