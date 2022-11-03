@@ -7,4 +7,4 @@ Install and run like every Visual Studio console application.
 
 <H1> License </H1>
 
-Under <a href="https://pl.wikipedia.org/wiki/WTFPL">WTFPL License</a>
+Under <a href="http://www.wtfpl.net/">WTFPL License</a>
