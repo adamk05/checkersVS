@@ -37,7 +37,7 @@ Game::Game() {
 
         this->actualPlayer = p1;
 
-        cout << "Gracz " << name1 << " zaczyna" << endl;
+        cout << "Gracz " << name1 << " zaczyna!" << endl;
     }
     else {
         Player p1(name1, black);
@@ -263,7 +263,7 @@ bool Game::move() {
                 }
 
                 if(options == 0) {
-                    cout << "Nie mo¿esz siê ruszyæ tym pionkiem, wybierz innego" << endl;
+                    cout << "Nie mozesz sie ruszyc tym pionkiem, wybierz innego" << endl;
                     return false;
                 }
                 else {
