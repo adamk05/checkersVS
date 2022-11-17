@@ -9,6 +9,6 @@ int main()
     Game game;
     game.move();
     game.move();
-   
+    game.board.drawBoard();
 }
 
