@@ -7,6 +7,7 @@
 #include "cstdlib"
 #include "iostream"
 #include "time.h"
+#include <map>
 using namespace std;
 
 Game::Game() {
@@ -60,6 +61,7 @@ bool Game::move() {
 
     string move_position;
     int options = 0;
+    map<int, Field*> optionsMap;
 
     this->board.drawBoard();
         cout << "Wybierz pole z pionkiem, ktorym chcesz ruszyc " << this->actualPlayer.getName() << endl;
