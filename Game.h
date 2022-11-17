@@ -10,6 +10,6 @@ public:
     Board board;
 
     Game();
-    void move();
+    bool move();
     bool gameEnd();
 };
