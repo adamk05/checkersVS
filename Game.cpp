@@ -8,6 +8,7 @@
 #include "iostream"
 #include "time.h"
 #include <map>
+#include <vector>
 using namespace std;
 
 Game::Game() {
@@ -61,7 +62,7 @@ bool Game::move() {
 
     string move_position;
     int options = 0;
-    map<int, Field*> optionsMap;
+    map<int, vector<Field*>> optionsMap;
 
     this->board.drawBoard();
         cout << "Wybierz pole z pionkiem, ktorym chcesz ruszyc " << this->actualPlayer.getName() << endl;
@@ -140,35 +141,43 @@ bool Game::move() {
 
                if (position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_empty) {
                    options++;
+                   vector<Field*> optionsArray = { board.getField(position_row_check + 1, position_column_check + 1), nullptr };
+                   optionsMap[options] = optionsArray;
                    cout << options << ". Prawy skos " << board.rows[position_row_check + 1] << board.columns[position_column_check + 1] << endl;
                }
 
                if (position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_empty) {
                    options++;
+                   vector<Field*> optionsArray = { board.getField(position_row_check + 1, position_column_check - 1), nullptr };
+                   optionsMap[options] = optionsArray;
                    cout << options << ". Lewy skos " << board.rows[position_row_check + 1] << board.columns[position_column_check - 1] << endl;
                }
 
                if ((position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_black)
                    && (position_column_check < 6 && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty)) {
                    options++;
+                   vector<Field*> optionsArray = { board.getField(position_row_check + 2, position_column_check + 2), board.getField(position_row_check + 1, position_column_check + 1) };
                    cout << options << ". Bicie pionka z " << board.rows[position_row_check + 1] << board.columns[position_column_check + 1] << " na " << board.rows[position_row_check + 2] << board.columns[position_column_check + 2] << endl;
                }
                
                if ((position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_black)
                    && (position_column_check > 1 && board.getField(position_row_check + 2, position_column_check - 2)->fieldState == FieldState::field_empty)) {
                    options++;
+                   vector<Field*> optionsArray = { board.getField(position_row_check + 2, position_column_check - 2), board.getField(position_row_check + 1, position_column_check - 1) };
                    cout << options << ". Bicie pionka z " << board.rows[position_row_check + 1] << board.columns[position_column_check - 1] << " na " << board.rows[position_row_check + 2] << board.columns[position_column_check - 2] << endl;
                }
 
                if ((position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_black_king)
                    && (position_column_check < 6 && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty)) {
                    options++;
+                   vector<Field*> optionsArray = { board.getField(position_row_check + 2, position_column_check + 2), board.getField(position_row_check + 1, position_column_check + 1) };
                    cout << options << ". Bicie hetmana z " << board.rows[position_row_check + 1] << board.columns[position_column_check + 1] << " na " << board.rows[position_row_check + 2] << board.columns[position_column_check + 2] << endl;
                }
 
                if ((position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_black_king)
                    && (position_column_check > 1 && board.getField(position_row_check + 2, position_column_check - 2)->fieldState == FieldState::field_empty)) {
                    options++;
+                   vector<Field*> optionsArray = { board.getField(position_row_check + 2, position_column_check - 2), board.getField(position_row_check + 1, position_column_check - 1) };
                    cout << options << ". Bicie hetmana z " << board.rows[position_row_check + 1] << board.columns[position_column_check - 1] << " na " << board.rows[position_row_check + 2] << board.columns[position_column_check - 2] << endl;
                }
 
@@ -176,6 +185,8 @@ bool Game::move() {
                    cout << "Nie mo¿esz siê ruszyæ tym pionkiem, wybierz innego"<<endl;
                    return false;
                }
+
+               //wybranie opcji
            }
            else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white_king) {
                 cout << "Rusz sie bialym hetmanem";
@@ -190,35 +201,41 @@ bool Game::move() {
             if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black) {
                 if (position_column_check < 7 && board.getField(position_row_check - 1, position_column_check + 1)->fieldState == FieldState::field_empty) {
                     options++;
+                    vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check + 1), nullptr };
                     cout << options << ". Prawy skos" << board.rows[position_row_check - 1] << board.columns[position_column_check + 1] << endl;
                 }
 
                 if (position_column_check > 0 && board.getField(position_row_check - 1, position_column_check - 1)->fieldState == FieldState::field_empty) {
                     options++;
+                    vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check - 1), nullptr };
                     cout << options << ". Lewy skos" << board.rows[position_row_check - 1] << board.columns[position_column_check - 1] << endl;
                 }
 
                 if ((position_column_check < 7 && board.getField(position_row_check - 1, position_column_check + 1)->fieldState == FieldState::field_white)
                     && (position_column_check < 6 && board.getField(position_row_check - 2, position_column_check + 2)->fieldState == FieldState::field_empty)) {
                     options++;
+                    vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check + 1), board.getField(position_row_check - 2, position_column_check + 2) };
                     cout << options << ". Bicie pionka z " << board.rows[position_row_check - 1] << board.columns[position_column_check + 1] << " na " << board.rows[position_row_check - 2] << board.columns[position_column_check + 2] << endl;
                 }
 
                 if ((position_column_check > 0 && board.getField(position_row_check - 1, position_column_check - 1)->fieldState == FieldState::field_white)
                     && (position_column_check > 1 && board.getField(position_row_check - 2, position_column_check - 2)->fieldState == FieldState::field_empty)) {
                     options++;
-                    cout << options << ". Bicie pionka z " << board.rows[position_row_check - 1] << board.columns[position_column_check - 1] << " na " << board.rows[position_row_check - 2] << board.columns[position_column_check - 2] << endl;
+                    vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check - 1), board.getField(position_row_check - 2, position_column_check + 2) };
+                    cout << options << ". Bicie pionka z " << board.rows[position_row_check - 1] << board.columns[position_column_check - 1] << " na " << board.rows[position_row_check - 2] << board.columns[position_column_check + 2] << endl;
                 }
 
                 if ((position_column_check < 7 && board.getField(position_row_check - 1, position_column_check + 1)->fieldState == FieldState::field_black_king)
                     && (position_column_check < 6 && board.getField(position_row_check - 2, position_column_check + 2)->fieldState == FieldState::field_empty)) {
                     options++;
+                    vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check + 1), board.getField(position_row_check - 2, position_column_check + 2) };
                     cout << options << ". Bicie hetmana z " << board.rows[position_row_check - 1] << board.columns[position_column_check + 1] << " na " << board.rows[position_row_check - 2] << board.columns[position_column_check + 2] << endl;
                 }
 
                 if ((position_column_check > 0 && board.getField(position_row_check - 1, position_column_check - 1)->fieldState == FieldState::field_black_king)
                     && (position_column_check > 1 && board.getField(position_row_check - 2, position_column_check - 2)->fieldState == FieldState::field_empty)) {
                     options++;
+                    vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check - 1), board.getField(position_row_check - 2, position_column_check - 2) };
                     cout << options << ". Bicie hetmana z " << board.rows[position_row_check - 1] << board.columns[position_column_check - 1] << " na " << board.rows[position_row_check - 2] << board.columns[position_column_check - 2] << endl;
                 }
 
