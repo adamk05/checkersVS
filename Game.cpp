@@ -37,7 +37,7 @@ Game::Game() {
 
         this->actualPlayer = p1;
 
-        cout << "Gracz " << name1 << " zaczyna" << endl;
+        cout << "Gracz " << name1 << " zaczyna!" << endl;
     }
     else {
         Player p1(name1, black);
@@ -226,7 +226,7 @@ bool Game::move() {
             }
 
             if (options == 0) {
-                cout << "Nie mozesz siê ruszyc tym pionkiem, wybierz innego" << endl;
+                cout << "Nie mozesz sie ruszyc tym pionkiem, wybierz innego" << endl;
                 return false;
             }
         }
@@ -236,14 +236,14 @@ bool Game::move() {
         else {
             cout << "Wpisz poprawne pole" << endl;
             return false;
-<<<<<<< HEAD
+
         }      
 
         if (this->actualPlayer.getColor() == white) {
 
            if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white) {
 
-               cout << "Wybierz, który ruch chcesz wykonaæ" << endl;
+               cout << "Wybierz, ktory ruch chcesz wykonac" << endl;
 
                if (position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_empty) {
                    options++;
@@ -288,7 +288,7 @@ bool Game::move() {
                }
 
                if(options == 0) {
-                   cout << "Nie mo¿esz siê ruszyæ tym pionkiem, wybierz innego"<<endl;
+                   cout << "Nie mozesz siê ruszyc tym pionkiem, wybierz innego"<<endl;
                    return false;
                }
 
@@ -346,7 +346,7 @@ bool Game::move() {
                 }
 
                 if(options == 0) {
-                    cout << "Nie mo¿esz siê ruszyæ tym pionkiem, wybierz innego" << endl;
+                    cout << "Nie mozesz sie ruszyc tym pionkiem, wybierz innego" << endl;
                     return false;
                 }
             }
@@ -357,9 +357,9 @@ bool Game::move() {
             	cout << "Wpisz poprawne pole" << endl;
                 return false;
             }
-=======
+
         }
->>>>>>> 902b7b55b438404482e149190fbdb3f6cbcb70df
+
     }
 
 
