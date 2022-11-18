@@ -52,6 +52,13 @@ Game::Game() {
     }
 }
 
+bool check_number(string str) {
+    for (int i = 0; i < str.length(); i++)
+        if (isdigit(str[i]) == false)
+            return false;
+    return true;
+}
+
 bool Game::move() {
     char actual_position_column_char;
     string actual_position_column;
@@ -191,13 +198,17 @@ bool Game::move() {
                    return false;
                } 
                else {
-                   int userOption = 0;
-                   while (userOption < 1 || userOption > options) {
+                   string userOption = "0";
+                   while (stoi(userOption) < 1 || stoi(userOption) > options) {
                        cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
                        cin >> userOption;
+                       while (!check_number(userOption)) {
+                           cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
+                           cin >> userOption;
+                       }
                    }
-                   Field* finalField = optionsMap.find(userOption)->second.at(0);
-                   Field* beatenField = optionsMap.find(userOption)->second.at(1);
+                   Field* finalField = optionsMap.find(stoi(userOption))->second.at(0);
+                   Field* beatenField = optionsMap.find(stoi(userOption))->second.at(1);
                    if (beatenField != nullptr) {
                        beatenField->fieldState = FieldState::field_empty;
                    }
@@ -267,13 +278,17 @@ bool Game::move() {
                     return false;
                 }
                 else {
-                    int userOption = 0;
-                    while (userOption < 1 || userOption > options) {
+                    string userOption = "0";
+                    while (stoi(userOption) < 1 || stoi(userOption) > options) {
                         cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
                         cin >> userOption;
+                        while (!check_number(userOption)) {
+                            cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
+                            cin >> userOption;
+                        }
                     }
-                    Field* finalField = optionsMap.find(userOption)->second.at(0);
-                    Field* beatenField = optionsMap.find(userOption)->second.at(1);
+                    Field* finalField = optionsMap.find(stoi(userOption))->second.at(0);
+                    Field* beatenField = optionsMap.find(stoi(userOption))->second.at(1);
                     if (beatenField != nullptr) {
                         beatenField->fieldState = FieldState::field_empty;
                     }

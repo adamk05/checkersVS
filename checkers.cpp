@@ -7,8 +7,9 @@ using namespace std;
 int main()
 {
     Game game;
-    game.move();
-    game.move();
+    while (true) {
+        game.move();
+    }
     game.board.drawBoard();
 }
 
