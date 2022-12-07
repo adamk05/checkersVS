@@ -244,7 +244,7 @@ bool Game::move() {
                 if ((position_column_check < 7 && board.getField(position_row_check - 1, position_column_check + 1)->fieldState == FieldState::field_white)
                     && (position_column_check < 6 && board.getField(position_row_check - 2, position_column_check + 2)->fieldState == FieldState::field_empty)) {
                     options++;
-                    vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check + 1), board.getField(position_row_check - 2, position_column_check + 2) };
+                    vector<Field*> optionsArray = { board.getField(position_row_check - 2, position_column_check + 2), board.getField(position_row_check - 1, position_column_check + 1) };
                     optionsMap[options] = optionsArray;
                     cout << options << ". Bicie pionka z " << board.rows[position_row_check - 1] << board.columns[position_column_check + 1] << " na " << board.rows[position_row_check - 2] << board.columns[position_column_check + 2] << endl;
                 }
@@ -252,7 +252,7 @@ bool Game::move() {
                 if ((position_column_check > 0 && board.getField(position_row_check - 1, position_column_check - 1)->fieldState == FieldState::field_white)
                     && (position_column_check > 1 && board.getField(position_row_check - 2, position_column_check - 2)->fieldState == FieldState::field_empty)) {
                     options++;
-                    vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check - 1), board.getField(position_row_check - 2, position_column_check + 2) };
+                    vector<Field*> optionsArray = { board.getField(position_row_check - 2, position_column_check - 2), board.getField(position_row_check - 1, position_column_check - 1) };
                     optionsMap[options] = optionsArray;
                     cout << options << ". Bicie pionka z " << board.rows[position_row_check - 1] << board.columns[position_column_check - 1] << " na " << board.rows[position_row_check - 2] << board.columns[position_column_check - 2] << endl;
                 }
