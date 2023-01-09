@@ -117,6 +117,12 @@ void Board::drawBoard()
             else if (this->board[i][j].fieldState == FieldState::field_black) {
                 cout << (char)179 << "b";
             }
+            else if (this->board[i][j].fieldState == FieldState::field_black_king) {
+                cout << (char)179 << "B";
+            }
+            else if (this->board[i][j].fieldState == FieldState::field_white_king) {
+                cout << (char)179 << "W";
+            }
             else{
                 cout << (char)179 << "w";
             }

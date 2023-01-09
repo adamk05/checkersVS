@@ -162,7 +162,7 @@ bool Game::move() {
                }
 
                if ((position_column_check < 7 && board.getField(position_row_check + 1, position_column_check + 1)->fieldState == FieldState::field_black)
-                   && (position_column_check < 6 && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty)) {
+                   && (position_column_check < 6 && board.getField(position_row_check + 2, position_column_check + 2) != nullptr && board.getField(position_row_check + 2, position_column_check + 2)->fieldState == FieldState::field_empty)) {
                    options++;
                    vector<Field*> optionsArray = { board.getField(position_row_check + 2, position_column_check + 2), board.getField(position_row_check + 1, position_column_check + 1) };
                    optionsMap[options] = optionsArray;
@@ -170,7 +170,7 @@ bool Game::move() {
                }
                
                if ((position_column_check > 0 && board.getField(position_row_check + 1, position_column_check - 1)->fieldState == FieldState::field_black)
-                   && (position_column_check > 1 && board.getField(position_row_check + 2, position_column_check - 2)->fieldState == FieldState::field_empty)) {
+                   && (position_column_check > 1 && board.getField(position_row_check + 2, position_column_check - 2) != nullptr && board.getField(position_row_check + 2, position_column_check - 2)->fieldState == FieldState::field_empty)) {
                    options++;
                    vector<Field*> optionsArray = { board.getField(position_row_check + 2, position_column_check - 2), board.getField(position_row_check + 1, position_column_check - 1) };
                    optionsMap[options] = optionsArray;
@@ -213,7 +213,12 @@ bool Game::move() {
                        beatenField->fieldState = FieldState::field_empty;
                    }
                    board.getField(position_row_check, position_column_check)->fieldState = FieldState::field_empty;
-                   finalField->fieldState = FieldState::field_white;
+                   if (finalField->getX() == 7) {
+                       finalField->fieldState = field_white_king;
+                   }
+                   else {
+                       finalField->fieldState = FieldState::field_white;
+                   }
                }
            }
            else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_white_king) {
@@ -293,7 +298,12 @@ bool Game::move() {
                         beatenField->fieldState = FieldState::field_empty;
                     }
                     board.getField(position_row_check, position_column_check)->fieldState = FieldState::field_empty;
-                    finalField->fieldState = FieldState::field_black;
+                    if (finalField->getX() == 0) {
+                        finalField->fieldState = FieldState::field_black_king;
+                    }
+                    else {
+                        finalField->fieldState = FieldState::field_black;
+                    }
                 }
             }
             else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black_king) {
