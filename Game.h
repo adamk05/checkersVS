@@ -11,5 +11,6 @@ public:
 
     Game();
     bool move();
+    bool move(int x, int y);
     bool gameEnd();
 };
