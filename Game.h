@@ -8,6 +8,7 @@ public:
     Player player2;
     Player actualPlayer;
     Board board;
+    Player winner;
 
     Game();
     bool move();

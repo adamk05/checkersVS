@@ -278,11 +278,12 @@ bool Game::move() {
                     cout << options << ". Bicie hetmana z " << board.rows[position_row_check - 1] << board.columns[position_column_check - 1] << " na " << board.rows[position_row_check - 2] << board.columns[position_column_check - 2] << endl;
                 }
 
-                if(options == 0) {
+                if (options == 0) {
                     cout << "Nie mozesz sie ruszyc tym pionkiem, wybierz innego" << endl;
                     return false;
                 }
                 else {
+                    //tu jest wybór ruchu pionka
                     string userOption = "0";
                     while (stoi(userOption) < 1 || stoi(userOption) > options) {
                         cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
@@ -307,10 +308,40 @@ bool Game::move() {
                 }
             }
             else if (board.getField(position_row_check, position_column_check)->fieldState == FieldState::field_black_king) {
-                cout << "Rusz sie czarnym hetmanem"<<endl;
+                //ruch hetmanem
+                int hetmanOptions = 0;
+                map<int, vector<Field*>> hetmanOptionsMap;
+                if (position_column_check != 7 && position_row_check != 0) { //przek¹tna prawo-góra
+                    bool canMove = true;
+                    int hetmanColumn = position_column_check;
+                    int hetmanRow = position_row_check;
+                    while (canMove) {
+                        hetmanColumn++;
+                        hetmanRow--;
+                        if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
+                            hetmanOptions++;
+                            vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
+                            hetmanOptionsMap[hetmanOptions] = option;
+                        }
+                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow - 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
+                            hetmanOptions++;
+                            vector<Field*> option = { this->board.getField(hetmanRow - 1, hetmanColumn + 1), this->board.getField(hetmanRow, hetmanColumn) };
+                            hetmanOptionsMap[hetmanOptions] = option;
+                        }
+                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white) {
+                            canMove = false;
+                        }
+                        else if (hetmanColumn == 0 || hetmanColumn == 7 || hetmanRow == 0 || hetmanRow == 7) { //to siê nie zmienia dla inncyh przk¹tncyh
+                            canMove = false;
+                        }
+                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow - 1, hetmanColumn + 1)->fieldState != FieldState::field_empty) {
+                            canMove = false;
+                        }
+                    }
+                }
             }
             else {
-            	cout << "Wpisz poprawne pole" << endl;
+                cout << "Wpisz poprawne pole" << endl;
                 return false;
             }
         }
@@ -325,6 +356,75 @@ bool Game::move() {
         this->actualPlayer = player1;
     }
     return true;
+}
+
+bool Game::move(int x, int y) {
+    FieldState color = this->board.board[x][y].fieldState;
+    if (color == white) {
+            if (y < 7 && board.getField(x + 1, y + 1)->fieldState == FieldState::field_empty) {
+                return true;
+            }
+
+            if (y > 0 && board.getField(x + 1, y - 1)->fieldState == FieldState::field_empty) {
+                return true;
+            }
+
+            if ((y < 7 && board.getField(x + 1, y + 1)->fieldState == FieldState::field_black)
+                && (y < 6 && board.getField(x + 2, y + 2) != nullptr && board.getField(x + 2, y + 2)->fieldState == FieldState::field_empty)) {
+                return true;
+            }
+
+            if ((y > 0 && board.getField(x + 1, y - 1)->fieldState == FieldState::field_black)
+                && (y > 1 && board.getField(x + 2, y - 2) != nullptr && board.getField(x + 2, y - 2)->fieldState == FieldState::field_empty)) {
+                return true;
+            }
+
+            if ((y < 7 && board.getField(x + 1, y + 1)->fieldState == FieldState::field_black_king)
+                && (y < 6 && board.getField(x + 2, y + 2)->fieldState == FieldState::field_empty)) {
+                return true;
+            }
+
+            if ((y > 0 && board.getField(x + 1, y - 1)->fieldState == FieldState::field_black_king)
+                && (y > 1 && board.getField(x + 2, y - 2)->fieldState == FieldState::field_empty)) {
+                return true;
+            }
+        
+        return false;
+    }
+    else if (color == black) {
+        if (y < 7 && board.getField(x - 1, y + 1)->fieldState == FieldState::field_empty) {
+            return true;
+        }
+
+        if (y > 0 && board.getField(x - 1, y - 1)->fieldState == FieldState::field_empty) {
+            return true;
+        }
+
+        if ((y < 7 && board.getField(x - 1, y + 1)->fieldState == FieldState::field_white)
+            && (y < 6 && board.getField(x - 2, y + 2)->fieldState == FieldState::field_empty)) {
+            return true;
+        }
+
+        if ((y > 0 && board.getField(x - 1, y - 1)->fieldState == FieldState::field_white)
+            && (y > 1 && board.getField(x - 2, y - 2)->fieldState == FieldState::field_empty)) {
+            return true;
+        }
+
+        if ((y < 7 && board.getField(x - 1, y + 1)->fieldState == FieldState::field_black_king)
+            && (y < 6 && board.getField(x - 2, y + 2)->fieldState == FieldState::field_empty)) {
+            return true;
+        }
+
+        if ((y > 0 && board.getField(x - 1, y - 1)->fieldState == FieldState::field_black_king)
+            && (y > 1 && board.getField(x - 2, y - 2)->fieldState == FieldState::field_empty)) {
+            return true;
+        }
+        return false;
+    }
+    else {
+        return false;
+    }
+
 }
 
 bool Game::gameEnd() {
