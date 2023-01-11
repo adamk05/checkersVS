@@ -558,7 +558,7 @@ bool Game::move() {
 
 bool Game::move(int x, int y) {
     FieldState color = this->board.board[x][y].fieldState;
-    if (color == white) {
+    if (color == FieldState::field_white) {
             if (y < 7 && board.getField(x + 1, y + 1)->fieldState == FieldState::field_empty) {
                 return true;
             }
@@ -589,7 +589,7 @@ bool Game::move(int x, int y) {
         
         return false;
     }
-    else if (color == black) {
+    else if (color == FieldState::field_black) {
         if (y < 7 && board.getField(x - 1, y + 1)->fieldState == FieldState::field_empty) {
             return true;
         }
@@ -626,5 +626,84 @@ bool Game::move(int x, int y) {
 }
 
 bool Game::gameEnd() {
+
+    bool any_white=false;
+    bool any_black=false;
+
+    for (int i = 0; i < 8;i++) {
+        for (int j = 0; j < 8; j++) {
+
+            if (board.getField(i, j)->fieldState == FieldState::field_white || board.getField(i, j)->fieldState == FieldState::field_white_king) {
+                any_white=true;
+            }
+            else if (board.getField(i, j)->fieldState == FieldState::field_black || board.getField(i, j)->fieldState == FieldState::field_black_king) {
+                any_black=true;
+            }
+
+        }
+
+    }
+
+    bool any_moves_black=false;
+    bool any_moves_white=false;
+
+    for (int k = 0; k < 8;k++) {
+        for (int l = 0; l < 8; l++) {
+            //move(i, j) move(i,j)->options == 0
+            if (this->board.getField(k, l)->fieldState == FieldState::field_white_king) { 
+                any_moves_white = true;
+                 
+            }
+
+            if (this->board.getField(k, l)->fieldState == FieldState::field_white) {
+            if (this->move(k, l) == true) {
+                any_moves_white = true;
+                
+            }
+        }
+
+            if (this->board.getField(k, l)->fieldState == FieldState::field_black_king) {
+                any_moves_black = true;
+                
+            }
+
+            if (this->board.getField(k, l)->fieldState == FieldState::field_black) {
+                if (this->move(k, l) == true) {
+                    any_moves_black = true;
+                   
+                }
+            }
+       }
+    }
+
+    if (any_black && any_white && any_moves_black && any_moves_white) {
+        return false;
+    }
+
+    else {
+        
+        if (any_black == false) {
+            if (this->player1.getColor() == Color::white)
+                cout << player1.getName() << " wygral" << endl;
+            else {
+                cout << player2.getName() << " wygral" << endl;
+            }
+
+        }
+        else if(any_white==false) {
+            if (this->player1.getColor() == Color::black) {
+                cout << player1.getName() << " wygral" << endl;
+            }
+            else {
+                cout << player2.getName() << " wygral" << endl;
+            }
+        }
+        else if (!any_moves_black || !any_moves_white) {
+            cout << "remis" << endl;
+        }
+
+        return true;
+    }
+    
     return false;
 }
