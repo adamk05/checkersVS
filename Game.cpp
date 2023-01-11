@@ -227,20 +227,21 @@ bool Game::move() {
                map<int, vector<Field*>> hetmanOptionsMap;
                if (position_column_check != 7 && position_row_check != 0) { //przek¹tna prawo-góra
                    bool canMove = true;
-                   int hetmanColumn = position_column_check;
-                   int hetmanRow = position_row_check;
+                   int hetmanColumn = position_column_check + 1;
+                   int hetmanRow = position_row_check - 1;
                    while (canMove) {
-                       hetmanColumn++;
-                       hetmanRow--;
                        if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
                            hetmanOptions++;
                            vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
                            hetmanOptionsMap[hetmanOptions] = option;
                        }
-                       else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king && this->board.getField(hetmanRow - 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
+                       else if (hetmanColumn + 1 <= 7 && hetmanRow - 1 >= 0 && (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king) && this->board.getField(hetmanRow - 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
                            hetmanOptions++;
                            vector<Field*> option = { this->board.getField(hetmanRow - 1, hetmanColumn + 1), this->board.getField(hetmanRow, hetmanColumn) };
                            hetmanOptionsMap[hetmanOptions] = option;
+                           hetmanColumn++;
+                           hetmanRow--;
+                           canMove = false;
                        }
                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black) {
                            canMove = false;
@@ -251,24 +252,30 @@ bool Game::move() {
                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king && this->board.getField(hetmanRow - 1, hetmanColumn + 1)->fieldState != FieldState::field_empty) {
                            canMove = false;
                        }
+                       hetmanColumn++;
+                       hetmanRow--;
+                       if (hetmanColumn > 7 || hetmanRow < 0) {
+                           canMove = false;
+                       }
                    }
                }
                if (position_column_check != 0 && position_row_check != 0) { //przek¹tna lewo-góra
                    bool canMove = true;
-                   int hetmanColumn = position_column_check;
-                   int hetmanRow = position_row_check;
+                   int hetmanColumn = position_column_check - 1;
+                   int hetmanRow = position_row_check - 1;
                    while (canMove) {
-                       hetmanColumn++;
-                       hetmanRow--;
                        if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
                            hetmanOptions++;
                            vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
                            hetmanOptionsMap[hetmanOptions] = option;
                        }
-                       else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king && this->board.getField(hetmanRow - 1, hetmanColumn - 1)->fieldState == FieldState::field_empty) {
+                       else if (hetmanColumn - 1 >= 0 && hetmanRow - 1 >= 0 && (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king) && this->board.getField(hetmanRow - 1, hetmanColumn - 1)->fieldState == FieldState::field_empty) {
                            hetmanOptions++;
                            vector<Field*> option = { this->board.getField(hetmanRow - 1, hetmanColumn - 1), this->board.getField(hetmanRow, hetmanColumn) };
                            hetmanOptionsMap[hetmanOptions] = option;
+                           hetmanColumn--;
+                           hetmanRow--;
+                           canMove = false;
                        }
                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black) {
                            canMove = false;
@@ -279,24 +286,30 @@ bool Game::move() {
                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king && this->board.getField(hetmanRow - 1, hetmanColumn - 1)->fieldState != FieldState::field_empty) {
                            canMove = false;
                        }
+                       hetmanColumn--;
+                       hetmanRow--;
+                       if (hetmanColumn > 7 || hetmanRow < 0) {
+                           canMove = false;
+                       }
                    }
                }
                if (position_column_check != 7 && position_row_check != 7) { //przek¹tna prawo-dó³
                    bool canMove = true;
-                   int hetmanColumn = position_column_check;
-                   int hetmanRow = position_row_check;
+                   int hetmanColumn = position_column_check + 1;
+                   int hetmanRow = position_row_check + 1;
                    while (canMove) {
-                       hetmanColumn++;
-                       hetmanRow--;
                        if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
                            hetmanOptions++;
                            vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
                            hetmanOptionsMap[hetmanOptions] = option;
                        }
-                       else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king && this->board.getField(hetmanRow + 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
+                       else if (hetmanRow + 1 <= 7 && hetmanColumn + 1 <= 7 && (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king) && this->board.getField(hetmanRow + 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
                            hetmanOptions++;
                            vector<Field*> option = { this->board.getField(hetmanRow + 1, hetmanColumn + 1), this->board.getField(hetmanRow, hetmanColumn) };
                            hetmanOptionsMap[hetmanOptions] = option;
+                           hetmanColumn++;
+                           hetmanRow++;
+                           canMove = false;
                        }
                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black) {
                            canMove = false;
@@ -307,24 +320,30 @@ bool Game::move() {
                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king && this->board.getField(hetmanRow + 1, hetmanColumn + 1)->fieldState != FieldState::field_empty) {
                            canMove = false;
                        }
+                       hetmanColumn++;
+                       hetmanRow++;
+                       if (hetmanColumn > 7 || hetmanRow > 7) {
+                           canMove = false;
+                       }
                    }
                }
                if (position_column_check != 0 && position_row_check != 7) { //przek¹tna lewo-dó³
                    bool canMove = true;
-                   int hetmanColumn = position_column_check;
-                   int hetmanRow = position_row_check;
+                   int hetmanColumn = position_column_check - 1;
+                   int hetmanRow = position_row_check + 1;
                    while (canMove) {
-                       hetmanColumn++;
-                       hetmanRow--;
                        if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
                            hetmanOptions++;
                            vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
                            hetmanOptionsMap[hetmanOptions] = option;
                        }
-                       else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king && this->board.getField(hetmanRow + 1, hetmanColumn - 1)->fieldState == FieldState::field_empty) {
+                       else if (hetmanColumn - 1 >= 0 && hetmanRow + 1 <= 7 && (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king) && this->board.getField(hetmanRow + 1, hetmanColumn - 1)->fieldState == FieldState::field_empty) {
                            hetmanOptions++;
                            vector<Field*> option = { this->board.getField(hetmanRow + 1, hetmanColumn - 1), this->board.getField(hetmanRow, hetmanColumn) };
                            hetmanOptionsMap[hetmanOptions] = option;
+                           hetmanColumn--;
+                           hetmanRow++;
+                           canMove = false;
                        }
                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black) {
                            canMove = false;
@@ -335,7 +354,48 @@ bool Game::move() {
                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_black_king && this->board.getField(hetmanRow + 1, hetmanColumn - 1)->fieldState != FieldState::field_empty) {
                            canMove = false;
                        }
+                       hetmanColumn--;
+                       hetmanRow++;
+                       if (hetmanColumn < 0 || hetmanRow > 7) {
+                           canMove = false;
+                       }
                    }
+               }
+
+               if (hetmanOptions == 0) {
+                   cout << "Nie mozesz sie ruszyc tym hetmanem, wybierz innego" << endl;
+                   return false;
+               }
+               else {
+                   //tu jest wybór ruchu pionka
+                   for (int i = 1; i <= hetmanOptionsMap.size(); i++) {
+                       cout << hetmanOptionsMap.find(i)->first << ". ";
+                       if (hetmanOptionsMap.find(i)->second.size() == 1) {
+                           cout << board.rows[hetmanOptionsMap.find(i)->second.at(0)->getX()] << board.columns[hetmanOptionsMap.find(i)->second.at(0)->getY()] << endl;
+                       }
+                       else {
+                           cout << "bicie z " << board.rows[hetmanOptionsMap.find(i)->second.at(1)->getX()] << board.columns[hetmanOptionsMap.find(i)->second.at(1)->getY()] << " na " << board.rows[hetmanOptionsMap.find(i)->second.at(0)->getX()] << board.columns[hetmanOptionsMap.find(i)->second.at(0)->getY()] << endl;
+                       }
+
+                   }
+                   string userOption = "0";
+                   while (stoi(userOption) < 1 || stoi(userOption) > hetmanOptions) {
+                       cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
+                       cin >> userOption;
+                       while (!check_number(userOption)) {
+                           cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
+                           cin >> userOption;
+                       }
+                   }
+                   Field* finalField = hetmanOptionsMap.find(stoi(userOption))->second.at(0);
+                   if (hetmanOptionsMap.find(stoi(userOption))->second.size() == 2) {
+                       Field* beatenField = hetmanOptionsMap.find(stoi(userOption))->second.at(1);
+                       if (beatenField != nullptr) {
+                           beatenField->fieldState = FieldState::field_empty;
+                       }
+                   }
+                   board.getField(position_row_check, position_column_check)->fieldState = FieldState::field_empty;
+                   finalField->fieldState = FieldState::field_white_king;
                }
            }
            else {
@@ -350,14 +410,14 @@ bool Game::move() {
                     options++;
                     vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check + 1), nullptr };
                     optionsMap[options] = optionsArray;
-                    cout << options << ". Prawy skos" << board.rows[position_row_check - 1] << board.columns[position_column_check + 1] << endl;
+                    cout << options << ". Prawy skos " << board.rows[position_row_check - 1] << board.columns[position_column_check + 1] << endl;
                 }
 
                 if (position_column_check > 0 && board.getField(position_row_check - 1, position_column_check - 1)->fieldState == FieldState::field_empty) {
                     options++;
                     vector<Field*> optionsArray = { board.getField(position_row_check - 1, position_column_check - 1), nullptr };
                     optionsMap[options] = optionsArray;
-                    cout << options << ". Lewy skos" << board.rows[position_row_check - 1] << board.columns[position_column_check - 1] << endl;
+                    cout << options << ". Lewy skos " << board.rows[position_row_check - 1] << board.columns[position_column_check - 1] << endl;
                 }
 
                 if ((position_column_check < 7 && board.getField(position_row_check - 1, position_column_check + 1)->fieldState == FieldState::field_white)
@@ -427,20 +487,21 @@ bool Game::move() {
                 map<int, vector<Field*>> hetmanOptionsMap;
                 if (position_column_check != 7 && position_row_check != 0) { //przek¹tna prawo-góra
                     bool canMove = true;
-                    int hetmanColumn = position_column_check;
-                    int hetmanRow = position_row_check;
+                    int hetmanColumn = position_column_check + 1;
+                    int hetmanRow = position_row_check - 1;
                     while (canMove) {
-                        hetmanColumn++;
-                        hetmanRow--;
                         if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
                             hetmanOptions++;
                             vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
                             hetmanOptionsMap[hetmanOptions] = option;
                         }
-                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow - 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
+                        else if (hetmanColumn + 1 <= 7 && hetmanRow - 1 >= 0 && (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king) && this->board.getField(hetmanRow - 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
                             hetmanOptions++;
                             vector<Field*> option = { this->board.getField(hetmanRow - 1, hetmanColumn + 1), this->board.getField(hetmanRow, hetmanColumn) };
                             hetmanOptionsMap[hetmanOptions] = option;
+                            hetmanColumn++;
+                            hetmanRow--;
+                            canMove = false;
                         }
                         else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white) {
                             canMove = false;
@@ -451,24 +512,30 @@ bool Game::move() {
                         else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow - 1, hetmanColumn + 1)->fieldState != FieldState::field_empty) {
                             canMove = false;
                         }
+                        hetmanColumn++;
+                        hetmanRow--;
+                        if (hetmanColumn > 7 || hetmanRow < 0) {
+                            canMove = false;
+                        }
                     }
                 }
                 if (position_column_check != 0 && position_row_check != 0) { //przek¹tna lewo-góra
                     bool canMove = true;
-                    int hetmanColumn = position_column_check;
-                    int hetmanRow = position_row_check;
+                    int hetmanColumn = position_column_check - 1;
+                    int hetmanRow = position_row_check - 1;
                     while (canMove) {
-                        hetmanColumn++;
-                        hetmanRow--;
                         if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
                             hetmanOptions++;
                             vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
                             hetmanOptionsMap[hetmanOptions] = option;
                         }
-                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow - 1, hetmanColumn - 1)->fieldState == FieldState::field_empty) {
+                        else if (hetmanColumn - 1 >= 0 && hetmanRow - 1 >= 0 && (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king) && this->board.getField(hetmanRow - 1, hetmanColumn - 1)->fieldState == FieldState::field_empty) {
                             hetmanOptions++;
                             vector<Field*> option = { this->board.getField(hetmanRow - 1, hetmanColumn - 1), this->board.getField(hetmanRow, hetmanColumn) };
                             hetmanOptionsMap[hetmanOptions] = option;
+                            hetmanColumn--;
+                            hetmanRow--;
+                            canMove = false;
                         }
                         else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white) {
                             canMove = false;
@@ -479,24 +546,30 @@ bool Game::move() {
                         else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow - 1, hetmanColumn - 1)->fieldState != FieldState::field_empty) {
                             canMove = false;
                         }
+                        hetmanColumn--;
+                        hetmanRow--;
+                        if (hetmanColumn > 7 || hetmanRow < 0) {
+                            canMove = false;
+                        }
                     }
                 }
                 if (position_column_check != 7 && position_row_check != 7) { //przek¹tna prawo-dó³
                     bool canMove = true;
-                    int hetmanColumn = position_column_check;
-                    int hetmanRow = position_row_check;
+                    int hetmanColumn = position_column_check + 1;
+                    int hetmanRow = position_row_check + 1;
                     while (canMove) {
-                        hetmanColumn++;
-                        hetmanRow--;
                         if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
                             hetmanOptions++;
                             vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
                             hetmanOptionsMap[hetmanOptions] = option;
                         }
-                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow + 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
+                        else if (hetmanRow + 1 <= 7 && hetmanColumn + 1 <= 7 && (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king) && this->board.getField(hetmanRow + 1, hetmanColumn + 1)->fieldState == FieldState::field_empty) {
                             hetmanOptions++;
                             vector<Field*> option = { this->board.getField(hetmanRow + 1, hetmanColumn + 1), this->board.getField(hetmanRow, hetmanColumn) };
                             hetmanOptionsMap[hetmanOptions] = option;
+                            hetmanColumn++;
+                            hetmanRow++;
+                            canMove = false;
                         }
                         else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white) {
                             canMove = false;
@@ -507,24 +580,30 @@ bool Game::move() {
                         else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow + 1, hetmanColumn + 1)->fieldState != FieldState::field_empty) {
                             canMove = false;
                         }
+                        hetmanColumn++;
+                        hetmanRow++;
+                        if (hetmanColumn > 7 || hetmanRow > 7) {
+                            canMove = false;
+                        }
                     }
                 }
                 if (position_column_check != 0 && position_row_check != 7) { //przek¹tna lewo-dó³
                     bool canMove = true;
-                    int hetmanColumn = position_column_check;
-                    int hetmanRow = position_row_check;
+                    int hetmanColumn = position_column_check - 1;
+                    int hetmanRow = position_row_check + 1;
                     while (canMove) {
-                        hetmanColumn++;
-                        hetmanRow--;
                         if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_empty) {
                             hetmanOptions++;
                             vector<Field*> option = { this->board.getField(hetmanRow, hetmanColumn) };
                             hetmanOptionsMap[hetmanOptions] = option;
                         }
-                        else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow + 1, hetmanColumn - 1)->fieldState == FieldState::field_empty) {
+                        else if (hetmanColumn - 1 >= 0 && hetmanRow + 1 <= 7 && (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king) && this->board.getField(hetmanRow + 1, hetmanColumn - 1)->fieldState == FieldState::field_empty) {
                             hetmanOptions++;
                             vector<Field*> option = { this->board.getField(hetmanRow + 1, hetmanColumn - 1), this->board.getField(hetmanRow, hetmanColumn) };
                             hetmanOptionsMap[hetmanOptions] = option;
+                            hetmanColumn--;
+                            hetmanRow++;
+                            canMove = false;
                         }
                         else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white) {
                             canMove = false;
@@ -535,7 +614,48 @@ bool Game::move() {
                         else if (this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white || this->board.getField(hetmanRow, hetmanColumn)->fieldState == FieldState::field_white_king && this->board.getField(hetmanRow + 1, hetmanColumn - 1)->fieldState != FieldState::field_empty) {
                             canMove = false;
                         }
+                        hetmanColumn--;
+                        hetmanRow++;
+                        if (hetmanColumn < 0 || hetmanRow > 7) {
+                            canMove = false;
+                        }
                     }
+                }
+
+                if (hetmanOptions == 0) {
+                    cout << "Nie mozesz sie ruszyc tym hetmanem, wybierz innego" << endl;
+                    return false;
+                }
+                else {
+                    //tu jest wybór ruchu pionka
+                    for (int i = 1; i <= hetmanOptionsMap.size(); i++) {
+                        cout << hetmanOptionsMap.find(i)->first << ". ";
+                        if (hetmanOptionsMap.find(i)->second.size() == 1) {
+                            cout << board.rows[hetmanOptionsMap.find(i)->second.at(0)->getX()] << board.columns[hetmanOptionsMap.find(i)->second.at(0)->getY()] << endl;
+                        }
+                        else {
+                            cout << "bicie z " << board.rows[hetmanOptionsMap.find(i)->second.at(1)->getX()] << board.columns[hetmanOptionsMap.find(i)->second.at(1)->getY()] << " na " << board.rows[hetmanOptionsMap.find(i)->second.at(0)->getX()] << board.columns[hetmanOptionsMap.find(i)->second.at(0)->getY()] << endl;
+                        }
+
+                    }
+                    string userOption = "0";
+                    while (stoi(userOption) < 1 || stoi(userOption) > hetmanOptions) {
+                        cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
+                        cin >> userOption;
+                        while (!check_number(userOption)) {
+                            cout << "Wybierz ruch (wpisz numer ruchu, który wybierasz) " << endl;
+                            cin >> userOption;
+                        }
+                    }
+                    Field* finalField = hetmanOptionsMap.find(stoi(userOption))->second.at(0);
+                    if (hetmanOptionsMap.find(stoi(userOption))->second.size() == 2) {
+                        Field* beatenField = hetmanOptionsMap.find(stoi(userOption))->second.at(1);
+                        if (beatenField != nullptr) {
+                            beatenField->fieldState = FieldState::field_empty;
+                        }
+                    }
+                    board.getField(position_row_check, position_column_check)->fieldState = FieldState::field_empty;
+                    finalField->fieldState = FieldState::field_black_king;
                 }
             }
             else {
