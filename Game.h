@@ -6,10 +6,12 @@ class Game {
 public:
     Player player1;
     Player player2;
-    Player* actualPlayer;
+    Player actualPlayer;
     Board board;
+    Player winner;
 
     Game();
-    void move();
+    bool move();
+    bool move(int x, int y);
     bool gameEnd();
 };
