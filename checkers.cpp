@@ -7,19 +7,18 @@ using namespace std;
 int main()
 {
     Game game;
-<<<<<<< HEAD
-  
-    game.board.board[6][1].fieldState = field_white;
-    game.board.board[7][0].fieldState = field_empty;
-    game.board.board[1][6].fieldState = field_black;
-    game.board.board[0][7].fieldState = field_empty;
-=======
 
-    game.board.board[1][2].fieldState = field_black;
-    game.board.board[0][1].fieldState = field_empty;
-    game.board.board[7][0].fieldState = field_empty;
-    game.board.board[7][6].fieldState = field_empty;
->>>>>>> adam
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            game.board.board[i][j].fieldState = FieldState::field_empty;
+        }
+    }
+
+    game.board.board[3][6].fieldState = FieldState::field_white;
+    game.board.board[6][5].fieldState = FieldState::field_black;
+    game.board.board[6][7].fieldState = FieldState::field_black;
+    game.board.board[1][1].fieldState = FieldState::field_black;
+    game.board.board[7][4].fieldState = FieldState::field_black;
 
     while (game.gameEnd() == false) {
         game.move();
