@@ -796,7 +796,11 @@ bool Game::gameEnd() {
        }
     }
 
-    if (any_black && any_white && any_moves_black && any_moves_white) {
+    if (any_black && any_white && this->actualPlayer.getColor() == Color::white && any_moves_white) {
+        return false;
+    }
+
+    else if (any_black && any_white && this->actualPlayer.getColor() == Color::black && any_moves_black) {
         return false;
     }
 
@@ -818,8 +822,11 @@ bool Game::gameEnd() {
                 cout << player2.getName() << " wygral" << endl;
             }
         }
-        else if (!any_moves_black || !any_moves_white) {
-            cout << "remis" << endl;
+        else if (this->actualPlayer.getColor() == Color::white && !any_moves_white) {
+            cout << "remis";
+        }
+        else if (this->actualPlayer.getColor() == Color::black && !any_moves_black) {
+            cout << "remis";
         }
 
         return true;
